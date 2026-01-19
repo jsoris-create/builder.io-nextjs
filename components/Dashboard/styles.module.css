@@ -586,6 +586,20 @@
     width: 100%;
     max-width: 100%;
     padding: 12px;
+    height: auto;
+    overflow: visible;
+  }
+
+  .welcomeTitle {
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -0.48px;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
   }
 
   .accountSummaryCards {
@@ -607,6 +621,11 @@
 
   .usersTabContainer {
     width: 100%;
+  }
+
+  .usersTabHeader {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .usersTabTitle {
