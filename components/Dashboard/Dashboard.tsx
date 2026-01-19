@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.css";
 
 interface TableRow {
@@ -9,15 +9,35 @@ interface TableRow {
   jobTitle: string;
 }
 
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  joinDate: string;
+  status: string;
+}
+
 interface DashboardProps {
   balance?: string;
 }
 
+type TabType = "dashboard" | "events" | "users";
+
 function Dashboard({ balance = "$ 1,893.44" }: DashboardProps) {
+  const [activeTab, setActiveTab] = useState<TabType>("dashboard");
+
   const tableData: TableRow[] = [
     { id: 1, name: "Darlene Robertson", dateOfBirth: "02/07/1971", jobTitle: "Dog Trainer" },
     { id: 2, name: "Ronald Richards", dateOfBirth: "28/03/1968", jobTitle: "Marketing Head" },
     { id: 3, name: "Jenone Bell", dateOfBirth: "12/08/1985", jobTitle: "President of Sales" },
+  ];
+
+  const usersData: User[] = [
+    { id: 1, name: "Alice Johnson", email: "alice.johnson@example.com", joinDate: "15/01/2024", status: "Active" },
+    { id: 2, name: "Bob Smith", email: "bob.smith@example.com", joinDate: "22/02/2024", status: "Active" },
+    { id: 3, name: "Carol Williams", email: "carol.williams@example.com", joinDate: "08/03/2024", status: "Inactive" },
+    { id: 4, name: "David Brown", email: "david.brown@example.com", joinDate: "14/04/2024", status: "Active" },
+    { id: 5, name: "Emma Davis", email: "emma.davis@example.com", joinDate: "29/04/2024", status: "Active" },
   ];
 
   return (
