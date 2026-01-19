@@ -136,6 +136,47 @@ function Dashboard({ balance = "$ 1,893.44" }: DashboardProps) {
         {/* Dashboard Tab */}
         {activeTab === "dashboard" && (
           <>
+            {/* Welcome Section */}
+            <div className={styles.welcomeSection}>
+              <h1 className={styles.welcomeTitle}>Welcome back, Sarah!</h1>
+              <p className={styles.welcomeSubtitle}>Here's what's happening with your business today.</p>
+            </div>
+
+            {/* Statistics Cards */}
+            <div className={styles.statsGrid}>
+              {statsData.map((stat) => (
+                <div key={stat.id} className={styles.statCard}>
+                  <div className={styles.statCardHeader}>
+                    <h3 className={styles.statLabel}>{stat.label}</h3>
+                    <div className={styles.statIcon} data-icon={stat.icon}>
+                      {stat.icon === "users" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M17 20H1v-2c0-2.25 2.235-3 3.5-3h10c1.265 0 3.5.75 3.5 3v2zm.5-10a2 2 0 100-4 2 2 0 000 4zm3.5 1h-5v-2h5v2zm4.5 7v-2h-5v2h5zm-5-11a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" fill="#545F71"/>
+                        </svg>
+                      )}
+                      {stat.icon === "revenue" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" fill="#545F71"/>
+                        </svg>
+                      )}
+                      {stat.icon === "sessions" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-2.16-2.66c-.3-.37-.85-.38-1.15-.04-.32.35-.02.88.35 1.16l2.74 3.32c.3.38.86.38 1.16 0l4.04-5.16c.32-.35.02-.88-.35-1.16-.32-.27-.85-.25-1.15.04z" fill="#545F71"/>
+                        </svg>
+                      )}
+                      {stat.icon === "conversion" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16 6l2.29 2.29-4.58 4.58-4-4L2 16.87V21h4.13L16 9.29 18.29 11.58 21 9V3h-5z" fill="#545F71"/>
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                  <div className={styles.statValue}>{stat.value}</div>
+                  <div className={styles.statChange}>{stat.change}</div>
+                </div>
+              ))}
+            </div>
+
             {/* Account Summary Cards */}
             <div className={styles.accountSummaryCards}>
               <div className={styles.accountCard}>
@@ -158,28 +199,31 @@ function Dashboard({ balance = "$ 1,893.44" }: DashboardProps) {
               </div>
             </div>
 
-            {/* Table */}
-            <div className={styles.tableContainer}>
-              <table className={styles.table}>
-                <thead>
-                  <tr>
-                    <th className={styles.tableHeader}>#</th>
-                    <th className={styles.tableHeader}>Name</th>
-                    <th className={styles.tableHeader}>Date of Birth</th>
-                    <th className={styles.tableHeader}>Job Title</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {tableData.map((row) => (
-                    <tr key={row.id} className={styles.tableRow}>
-                      <td className={styles.tableCell}>{row.id}</td>
-                      <td className={styles.tableCell}>{row.name}</td>
-                      <td className={styles.tableCell}>{row.dateOfBirth}</td>
-                      <td className={styles.tableCell}>{row.jobTitle}</td>
+            {/* Recent Team Section */}
+            <div className={styles.recentSection}>
+              <h2 className={styles.sectionTitle}>Recent Team Members</h2>
+              <div className={styles.tableContainer}>
+                <table className={styles.table}>
+                  <thead>
+                    <tr>
+                      <th className={styles.tableHeader}>#</th>
+                      <th className={styles.tableHeader}>Name</th>
+                      <th className={styles.tableHeader}>Date of Birth</th>
+                      <th className={styles.tableHeader}>Job Title</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {tableData.map((row) => (
+                      <tr key={row.id} className={styles.tableRow}>
+                        <td className={styles.tableCell}>{row.id}</td>
+                        <td className={styles.tableCell}>{row.name}</td>
+                        <td className={styles.tableCell}>{row.dateOfBirth}</td>
+                        <td className={styles.tableCell}>{row.jobTitle}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </>
         )}
