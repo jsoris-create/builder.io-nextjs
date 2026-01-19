@@ -17,6 +17,14 @@ interface User {
   status: string;
 }
 
+interface StatCard {
+  id: number;
+  label: string;
+  value: string;
+  change: string;
+  icon: string;
+}
+
 interface DashboardProps {
   balance?: string;
 }
@@ -26,10 +34,19 @@ type TabType = "dashboard" | "events" | "users";
 function Dashboard({ balance = "$ 1,893.44" }: DashboardProps) {
   const [activeTab, setActiveTab] = useState<TabType>("dashboard");
 
+  const statsData: StatCard[] = [
+    { id: 1, label: "Total Users", value: "1,240", change: "+12% from last month", icon: "users" },
+    { id: 2, label: "Total Revenue", value: "$45,231.89", change: "+8% from last month", icon: "revenue" },
+    { id: 3, label: "Active Sessions", value: "342", change: "+23% from last week", icon: "sessions" },
+    { id: 4, label: "Conversion Rate", value: "3.24%", change: "-2% from last month", icon: "conversion" },
+  ];
+
   const tableData: TableRow[] = [
     { id: 1, name: "Darlene Robertson", dateOfBirth: "02/07/1971", jobTitle: "Dog Trainer" },
     { id: 2, name: "Ronald Richards", dateOfBirth: "28/03/1968", jobTitle: "Marketing Head" },
     { id: 3, name: "Jenone Bell", dateOfBirth: "12/08/1985", jobTitle: "President of Sales" },
+    { id: 4, name: "Leslie Alexander", dateOfBirth: "15/11/1980", jobTitle: "UI Designer" },
+    { id: 5, name: "Michael Scott", dateOfBirth: "22/05/1975", jobTitle: "Regional Manager" },
   ];
 
   const usersData: User[] = [
@@ -38,6 +55,9 @@ function Dashboard({ balance = "$ 1,893.44" }: DashboardProps) {
     { id: 3, name: "Carol Williams", email: "carol.williams@example.com", joinDate: "08/03/2024", status: "Inactive" },
     { id: 4, name: "David Brown", email: "david.brown@example.com", joinDate: "14/04/2024", status: "Active" },
     { id: 5, name: "Emma Davis", email: "emma.davis@example.com", joinDate: "29/04/2024", status: "Active" },
+    { id: 6, name: "Frank Wilson", email: "frank.wilson@example.com", joinDate: "05/05/2024", status: "Active" },
+    { id: 7, name: "Grace Lee", email: "grace.lee@example.com", joinDate: "18/05/2024", status: "Inactive" },
+    { id: 8, name: "Henry Martinez", email: "henry.martinez@example.com", joinDate: "24/05/2024", status: "Active" },
   ];
 
   return (
