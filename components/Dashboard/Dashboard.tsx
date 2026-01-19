@@ -171,6 +171,9 @@ function Dashboard({ balance = "$ 1,893.44" }: DashboardProps) {
                       )}
                     </div>
                   </div>
+                  <div style={{ display: "flex", flexDirection: "column", position: "relative", marginTop: "20px", height: "auto" }}>
+                    Enter some text...
+                  </div>
                   <div className={styles.statValue}>{stat.value}</div>
                   <div className={styles.statChange}>{stat.change}</div>
                 </div>
