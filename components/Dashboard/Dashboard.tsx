@@ -231,7 +231,15 @@ function Dashboard({ balance = "$ 1,893.44" }: DashboardProps) {
         {/* Users Tab */}
         {activeTab === "users" && (
           <div className={styles.usersTabContainer}>
-            <h2 className={styles.usersTabTitle}>Users</h2>
+            <div className={styles.usersTabHeader}>
+              <div>
+                <h2 className={styles.usersTabTitle}>Users</h2>
+                <p className={styles.usersTabSubtitle}>Manage and monitor all users in the system</p>
+              </div>
+              <button className={`${styles.btn} ${styles.btnPrimary}`}>
+                <span className={styles.btnLabel}>+ Add User</span>
+              </button>
+            </div>
             <div className={styles.tableContainer}>
               <table className={styles.table}>
                 <thead>
