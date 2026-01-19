@@ -189,6 +189,111 @@
   top: 135px;
   width: calc(100% - 362px);
   max-width: 901px;
+  overflow-y: auto;
+  height: calc(100vh - 135px);
+  padding-bottom: 32px;
+}
+
+/* Welcome Section */
+.welcomeSection {
+  margin-bottom: 32px;
+}
+
+.welcomeTitle {
+  color: #545F71;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  letter-spacing: -0.64px;
+  margin: 0 0 8px 0;
+}
+
+.welcomeSubtitle {
+  color: #9BA5B7;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.32px;
+  margin: 0;
+}
+
+/* Statistics Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.statCard {
+  background: #FFF;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.statCardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.statLabel {
+  color: #9BA5B7;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: -0.28px;
+  margin: 0;
+}
+
+.statIcon {
+  width: 40px;
+  height: 40px;
+  background: #EEF1F4;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.statValue {
+  color: #545F71;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: -0.48px;
+}
+
+.statChange {
+  color: #10B981;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: -0.26px;
+}
+
+/* Recent Section */
+.recentSection {
+  margin-top: 32px;
+}
+
+.sectionTitle {
+  color: #545F71;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: -0.4px;
+  margin: 0 0 16px 0;
 }
 
 /* Account Summary Cards */
