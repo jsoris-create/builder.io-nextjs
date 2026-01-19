@@ -127,6 +127,7 @@
   cursor: pointer;
   position: relative;
   transition: background-color 0.2s;
+  user-select: none;
 }
 
 .navItem:hover {
