@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.css";
 
 interface TableRow {
@@ -9,15 +9,55 @@ interface TableRow {
   jobTitle: string;
 }
 
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  joinDate: string;
+  status: string;
+}
+
+interface StatCard {
+  id: number;
+  label: string;
+  value: string;
+  change: string;
+  icon: string;
+}
+
 interface DashboardProps {
   balance?: string;
 }
 
+type TabType = "dashboard" | "events" | "users";
+
 function Dashboard({ balance = "$ 1,893.44" }: DashboardProps) {
+  const [activeTab, setActiveTab] = useState<TabType>("dashboard");
+
+  const statsData: StatCard[] = [
+    { id: 1, label: "Total Users", value: "1,240", change: "+12% from last month", icon: "users" },
+    { id: 2, label: "Total Revenue", value: "$45,231.89", change: "+8% from last month", icon: "revenue" },
+    { id: 3, label: "Active Sessions", value: "342", change: "+23% from last week", icon: "sessions" },
+    { id: 4, label: "Conversion Rate", value: "3.24%", change: "-2% from last month", icon: "conversion" },
+  ];
+
   const tableData: TableRow[] = [
     { id: 1, name: "Darlene Robertson", dateOfBirth: "02/07/1971", jobTitle: "Dog Trainer" },
     { id: 2, name: "Ronald Richards", dateOfBirth: "28/03/1968", jobTitle: "Marketing Head" },
     { id: 3, name: "Jenone Bell", dateOfBirth: "12/08/1985", jobTitle: "President of Sales" },
+    { id: 4, name: "Leslie Alexander", dateOfBirth: "15/11/1980", jobTitle: "UI Designer" },
+    { id: 5, name: "Michael Scott", dateOfBirth: "22/05/1975", jobTitle: "Regional Manager" },
+  ];
+
+  const usersData: User[] = [
+    { id: 1, name: "Alice Johnson", email: "alice.johnson@example.com", joinDate: "15/01/2024", status: "Active" },
+    { id: 2, name: "Bob Smith", email: "bob.smith@example.com", joinDate: "22/02/2024", status: "Active" },
+    { id: 3, name: "Carol Williams", email: "carol.williams@example.com", joinDate: "08/03/2024", status: "Inactive" },
+    { id: 4, name: "David Brown", email: "david.brown@example.com", joinDate: "14/04/2024", status: "Active" },
+    { id: 5, name: "Emma Davis", email: "emma.davis@example.com", joinDate: "29/04/2024", status: "Active" },
+    { id: 6, name: "Frank Wilson", email: "frank.wilson@example.com", joinDate: "05/05/2024", status: "Active" },
+    { id: 7, name: "Grace Lee", email: "grace.lee@example.com", joinDate: "18/05/2024", status: "Inactive" },
+    { id: 8, name: "Henry Martinez", email: "henry.martinez@example.com", joinDate: "24/05/2024", status: "Active" },
   ];
 
   return (
@@ -44,7 +84,10 @@ function Dashboard({ balance = "$ 1,893.44" }: DashboardProps) {
       {/* Side Navigation */}
       <aside className={styles.sideNav}>
         <div className={styles.navItems}>
-          <div className={`${styles.navItem} ${styles.navItemActive}`}>
+          <div
+            className={`${styles.navItem} ${activeTab === "dashboard" ? styles.navItemActive : ""}`}
+            onClick={() => setActiveTab("dashboard")}
+          >
             <svg className={styles.navIcon} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M19 11H5M19 11C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11M19 11V9C19 7.89543 18.1046 7 17 7M5 11V9C5 7.89543 5.89543 7 7 7M7 7V5C7 3.89543 7.89543 3 9 3H15C16.1046 3 17 3.89543 17 5V7M7 7H17" stroke="#545F71" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -53,7 +96,10 @@ function Dashboard({ balance = "$ 1,893.44" }: DashboardProps) {
               <path d="M7.5 4.16666L13.3333 9.99999L7.5 15.8333" stroke="#9BA5B7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
-          <div className={styles.navItem}>
+          <div
+            className={`${styles.navItem} ${activeTab === "events" ? styles.navItemActive : ""}`}
+            onClick={() => setActiveTab("events")}
+          >
             <svg className={styles.navIcon} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M8 7V3M16 7V3M7 11H17M5 21H19C20.1046 21 21 20.1046 21 19V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V19C3 20.1046 3.89543 21 5 21Z" stroke="#545F71" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -62,7 +108,10 @@ function Dashboard({ balance = "$ 1,893.44" }: DashboardProps) {
               <path d="M7.5 4.16666L13.3333 9.99999L7.5 15.8333" stroke="#9BA5B7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
-          <div className={styles.navItem}>
+          <div
+            className={`${styles.navItem} ${activeTab === "users" ? styles.navItemActive : ""}`}
+            onClick={() => setActiveTab("users")}
+          >
             <svg className={styles.navIcon} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 4.35418C12.7329 3.52375 13.8053 3 15 3C17.2091 3 19 4.79086 19 7C19 9.20914 17.2091 11 15 11C13.8053 11 12.7329 10.4762 12 9.64582M15 21H3V20C3 16.6863 5.68629 14 9 14C12.3137 14 15 16.6863 15 20V21ZM15 21H21V20C21 16.6863 18.3137 14 15 14C13.9071 14 12.8825 14.2922 12 14.8027M13 7C13 9.20914 11.2091 11 9 11C6.79086 11 5 9.20914 5 7C5 4.79086 6.79086 3 9 3C11.2091 3 13 4.79086 13 7Z" stroke="#545F71" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -84,51 +133,154 @@ function Dashboard({ balance = "$ 1,893.44" }: DashboardProps) {
 
       {/* Main Content */}
       <main className={styles.mainContent}>
-        {/* Account Summary Cards */}
-        <div className={styles.accountSummaryCards}>
-          <div className={styles.accountCard}>
-            <div className={styles.balanceAmount}>{balance}</div>
-            <button className={`${styles.btn} ${styles.btnSecondary}`}>
-              <span className={styles.btnLabel}>Transfer</span>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="#545F71" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          </div>
-          <div className={styles.accountCard}>
-            <div className={styles.balanceAmount}>{balance}</div>
-            <button className={`${styles.btn} ${styles.btnPrimary}`}>
-              <span className={styles.btnLabel}>Add money</span>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 6V12M12 12V18M12 12H18M12 12L6 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          </div>
-        </div>
+        {/* Dashboard Tab */}
+        {activeTab === "dashboard" && (
+          <>
+            {/* Welcome Section */}
+            <div className={styles.welcomeSection}>
+              <h1 className={styles.welcomeTitle}>Welcome back, Sarah!</h1>
+              <p className={styles.welcomeSubtitle}>Here's what's happening with your business today.</p>
+            </div>
 
-        {/* Table */}
-        <div className={styles.tableContainer}>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th className={styles.tableHeader}>#</th>
-                <th className={styles.tableHeader}>Name</th>
-                <th className={styles.tableHeader}>Date of Birth</th>
-                <th className={styles.tableHeader}>Job Title</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tableData.map((row) => (
-                <tr key={row.id} className={styles.tableRow}>
-                  <td className={styles.tableCell}>{row.id}</td>
-                  <td className={styles.tableCell}>{row.name}</td>
-                  <td className={styles.tableCell}>{row.dateOfBirth}</td>
-                  <td className={styles.tableCell}>{row.jobTitle}</td>
-                </tr>
+            {/* Statistics Cards */}
+            <div className={styles.statsGrid}>
+              {statsData.map((stat) => (
+                <div key={stat.id} className={styles.statCard}>
+                  <div className={styles.statCardHeader}>
+                    <h3 className={styles.statLabel}>{stat.label}</h3>
+                    <div className={styles.statIcon} data-icon={stat.icon}>
+                      {stat.icon === "users" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M17 20H1v-2c0-2.25 2.235-3 3.5-3h10c1.265 0 3.5.75 3.5 3v2zm.5-10a2 2 0 100-4 2 2 0 000 4zm3.5 1h-5v-2h5v2zm4.5 7v-2h-5v2h5zm-5-11a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" fill="#545F71"/>
+                        </svg>
+                      )}
+                      {stat.icon === "revenue" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" fill="#545F71"/>
+                        </svg>
+                      )}
+                      {stat.icon === "sessions" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-2.16-2.66c-.3-.37-.85-.38-1.15-.04-.32.35-.02.88.35 1.16l2.74 3.32c.3.38.86.38 1.16 0l4.04-5.16c.32-.35.02-.88-.35-1.16-.32-.27-.85-.25-1.15.04z" fill="#545F71"/>
+                        </svg>
+                      )}
+                      {stat.icon === "conversion" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16 6l2.29 2.29-4.58 4.58-4-4L2 16.87V21h4.13L16 9.29 18.29 11.58 21 9V3h-5z" fill="#545F71"/>
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", position: "relative", marginTop: "20px", height: "auto" }}>
+                    Enter some text...
+                  </div>
+                  <div className={styles.statValue}>{stat.value}</div>
+                  <div className={styles.statChange}>{stat.change}</div>
+                </div>
               ))}
-            </tbody>
-          </table>
-        </div>
+            </div>
+
+            {/* Account Summary Cards */}
+            <div className={styles.accountSummaryCards}>
+              <div className={styles.accountCard}>
+                <div className={styles.balanceAmount}>{balance}</div>
+                <button className={`${styles.btn} ${styles.btnSecondary}`}>
+                  <span className={styles.btnLabel}>Transfer</span>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 4V9H4.58152M19.9381 11C19.446 7.05369 16.0796 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9M4.58152 9H9M20 20V15H19.4185M19.4185 15C18.2317 17.9318 15.3574 20 12 20C7.92038 20 4.55399 16.9463 4.06189 13M19.4185 15H15" stroke="#545F71" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+              <div className={styles.accountCard}>
+                <div className={styles.balanceAmount}>{balance}</div>
+                <button className={`${styles.btn} ${styles.btnPrimary}`}>
+                  <span className={styles.btnLabel}>Add money</span>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 6V12M12 12V18M12 12H18M12 12L6 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* Recent Team Section */}
+            <div className={styles.recentSection}>
+              <h2 className={styles.sectionTitle}>Recent Team Members</h2>
+              <div className={styles.tableContainer}>
+                <table className={styles.table}>
+                  <thead>
+                    <tr>
+                      <th className={styles.tableHeader}>#</th>
+                      <th className={styles.tableHeader}>Name</th>
+                      <th className={styles.tableHeader}>Date of Birth</th>
+                      <th className={styles.tableHeader}>Job Title</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {tableData.map((row) => (
+                      <tr key={row.id} className={styles.tableRow}>
+                        <td className={styles.tableCell}>{row.id}</td>
+                        <td className={styles.tableCell}>{row.name}</td>
+                        <td className={styles.tableCell}>{row.dateOfBirth}</td>
+                        <td className={styles.tableCell}>{row.jobTitle}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* Users Tab */}
+        {activeTab === "users" && (
+          <div className={styles.usersTabContainer}>
+            <div className={styles.usersTabHeader}>
+              <div>
+                <h2 className={styles.usersTabTitle}>Users</h2>
+                <p className={styles.usersTabSubtitle}>Manage and monitor all users in the system</p>
+              </div>
+              <button className={`${styles.btn} ${styles.btnPrimary}`}>
+                <span className={styles.btnLabel}>+ Add User</span>
+              </button>
+            </div>
+            <div className={styles.tableContainer}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th className={styles.tableHeader}>#</th>
+                    <th className={styles.tableHeader}>Name</th>
+                    <th className={styles.tableHeader}>Email</th>
+                    <th className={styles.tableHeader}>Join Date</th>
+                    <th className={styles.tableHeader}>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {usersData.map((user) => (
+                    <tr key={user.id} className={styles.tableRow}>
+                      <td className={styles.tableCell}>{user.id}</td>
+                      <td className={styles.tableCell}>{user.name}</td>
+                      <td className={styles.tableCell}>{user.email}</td>
+                      <td className={styles.tableCell}>{user.joinDate}</td>
+                      <td className={styles.tableCell}>
+                        <span className={`${styles.statusBadge} ${user.status === "Active" ? styles.statusActive : styles.statusInactive}`}>
+                          {user.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Events Tab */}
+        {activeTab === "events" && (
+          <div className={styles.emptyStateContainer}>
+            <h2 className={styles.emptyStateTitle}>Events</h2>
+            <p className={styles.emptyStateText}>No events to display yet.</p>
+          </div>
+        )}
       </main>
     </div>
   );
